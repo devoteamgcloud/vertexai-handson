@@ -1,0 +1,57 @@
+default_stages: [pre-commit]
+
+repos:
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.6.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: []
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-ast
+      - id: check-byte-order-marker
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-json
+      - id: check-yaml
+      - id: debug-statements
+      - id: detect-private-key
+      - id: mixed-line-ending
+      - id: pretty-format-json
+        args: [--autofix, --indent, "4"]
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.3.1
+    hooks:
+      - id: remove-crlf
+      - id: forbid-crlf
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.28.0
+    hooks:
+      - id: yamllint
+        args: ['-d {extends: relaxed, rules: {line-length: disable}}', '-s']
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.77.0
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_tflint
+      - id: terraform_tfsec
+      - id: terraform_docs
+  - repo: local
+    hooks:
+      - id: init env
+        name: init env
+        language: system
+        entry: scripts/init_env.sh
+        pass_filenames: false
+      - id: lint pipeline classification_automl
+        name: lint pipeline classification_automl
+        language: system
+        entry: bash -c 'cd pipelines/classification_automl && make lint'
+        pass_filenames: false
+        files: ^(pipelines/classification_automl/)

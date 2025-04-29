@@ -1,0 +1,105 @@
+[project]
+dependencies = [
+    "google-cloud-pipeline-components>=2.19.0",
+    "kfp==2.7.0",
+]
+description = "Pipelines - Classification AutoML"
+name = "classification-automl"
+readme = "README.md"
+requires-python = "~=3.9"
+version = "1.0.0"
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[dependency-groups]
+lint = [
+    "bandit>=1.8.0",
+    "codespell>=2.3.0",
+    "mypy>=1.14.0",
+    "pydocstyle>=6.3.0",
+    "pylint>=3.3.3",
+    "ruff>=0.8.4",
+    "toml-sort>=0.24.2",
+]
+test = [
+    "coverage>=7.6.9",
+    "pytest-cov>=6.0.0",
+    "pytest-mock>=3.14.0",
+    "pytest>=8.3.4",
+]
+
+[tool.bandit]
+exclude_dirs = [
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".venv",
+    "tests",
+]
+
+[tool.codespell]
+skip = ".git,*.pdf,*.svg,*.yaml,uv.lock"
+
+[tool.hatch.build.targets.wheel]
+packages = ["classification_automl"]
+
+[tool.mypy]
+check_untyped_defs = true
+disable_error_code = "import-untyped, no-untyped-call"
+disallow_any_generics = true
+disallow_any_unimported = true
+disallow_incomplete_defs = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_decorators = true
+disallow_untyped_defs = true
+explicit_package_bases = true
+extra_checks = true
+no_implicit_reexport = true
+strict_equality = true
+warn_incomplete_stub = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[tool.pylint.FORMAT]
+max-line-length = 88
+
+[tool.pylint.MAIN]
+init-hook = "import sys; sys.path.extend([\"classification_automl\"])"
+
+[tool.ruff]
+builtins = ["_"]
+indent-width = 4
+line-length = 88
+required-version = ">=0.4.3"
+
+[tool.ruff.format]
+indent-style = "space"
+line-ending = "lf"
+quote-style = "double"
+
+[tool.ruff.lint]
+extend-select = ["I"]
+fixable = ["ALL"]
+select = ["E"]
+
+[tool.tomlsort]
+all = true
+in_place = true
+no_block_comments = true
+no_comments = true
+no_footer_comments = true
+no_header_comments = true
+no_inline_comments = true
+sort_first = ["project"]
+sort_inline_arrays = true
+sort_inline_tables = true
+sort_table_keys = true
+spaces_before_inline_comment = 2
+spaces_indent_inline_array = 4
+trailing_comma_inline_array = true
