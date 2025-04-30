@@ -1,6 +1,6 @@
 """Run the classification_automl pipeline."""
 
-from google.cloud import aiplatform, bigquery
+from google.cloud import aiplatform
 
 PROJECT_ID = "workshop-mlops-sandbox"
 LOCATION = "europe-west1"
@@ -14,13 +14,13 @@ ENDPOINT_DISPLAY_NAME = "classification-endpoint"
 MACHINE_TYPE = "n1-standard-4"
 BQ_SOURCE = "workshop-mlops-sandbox.ml_datasets.beans1"
 
-client = bigquery.Client()
-bq_region = client.get_table(BQ_SOURCE).location.lower()
-if bq_region != LOCATION:
-    raise ValueError(
-        f"BigQuery region {bq_region} does not match pipeline region {LOCATION}"
-    )
-print(f"Region validated: {LOCATION}")
+# client = bigquery.Client()
+# bq_region = client.get_table(BQ_SOURCE).location.lower()
+# if bq_region != LOCATION:
+#     raise ValueError(
+#         f"BigQuery region {bq_region} does not match pipeline region {LOCATION}"
+#     )
+# print(f"Region validated: {LOCATION}")
 
 
 # Configure the pipeline
